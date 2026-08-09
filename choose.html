@@ -1,0 +1,29 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>Choose Algorithm</title>
+<link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+<div class="page">
+<div class="card">
+<h1>Choose Data Mining Algorithm</h1>
+<p class="subtitle">Dataset: <b>{{ filename }}</b> &nbsp; | &nbsp; Instances: <b>{{ rows }}</b></p>
+<div class="dataset-info">
+<p><b>Target attribute:</b> {{ target }}</p>
+<p><b>Attributes:</b> {{ columns|join(", ") }}</p>
+</div>
+<form method="POST" action="/run">
+<input type="hidden" name="token" value="{{ token }}">
+<label class="radio"><input type="radio" name="algorithm" value="J48 Decision Tree" checked> J48 Decision Tree</label>
+<label class="radio"><input type="radio" name="algorithm" value="KNN"> KNN</label>
+<label class="radio"><input type="radio" name="algorithm" value="Naive Bayes"> Naive Bayes</label>
+<label class="radio"><input type="radio" name="algorithm" value="Random Forest"> Random Forest</label>
+<button class="blue" type="submit">Run Algorithm</button>
+</form>
+<a class="back" href="/">← Back to Home</a>
+</div>
+</div>
+</body>
+</html>
