@@ -1,0 +1,70 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>{{ algorithm }} Results</title>
+<link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+<div class="page">
+<div class="card wide">
+<h1>{{ algorithm }} Results</h1>
+<p class="subtitle">{{ filename }}</p>
+
+<div class="metrics">
+<div><span>{{ metrics.total_dataset }}</span><small>Dataset Instances</small></div>
+<div><span>{{ "%.2f"|format(metrics.accuracy) }}%</span><small>Accuracy</small></div>
+<div><span>{{ metrics.correct }}</span><small>Correctly Classified</small></div>
+<div><span>{{ metrics.incorrect }}</span><small>Incorrectly Classified</small></div>
+<div><span>{{ "%.4f"|format(metrics.kappa) }}</span><small>Kappa Statistic</small></div>
+<div><span>{{ "%.4f"|format(metrics.precision) }}</span><small>Weighted Precision</small></div>
+<div><span>{{ "%.4f"|format(metrics.recall) }}</span><small>Weighted Recall</small></div>
+<div><span>{{ "%.4f"|format(metrics.f1) }}</span><small>Weighted F-Measure</small></div>
+</div>
+
+<div class="section">
+<h2>Classification Report</h2>
+<table class="data-table">
+<tr><th>Class</th><th>Precision</th><th>Recall</th><th>F1-Score</th><th>Support</th></tr>
+{% for c in classes %}
+<tr>
+<td>{{ c }}</td>
+<td>{{ "%.4f"|format(report[c|string]['precision']) }}</td>
+<td>{{ "%.4f"|format(report[c|string]['recall']) }}</td>
+<td>{{ "%.4f"|format(report[c|string]['f1-score']) }}</td>
+<td>{{ report[c|string]['support'] }}</td>
+</tr>
+{% endfor %}
+</table>
+</div>
+
+<div class="visual-grid">
+<div class="visual"><h2>Confusion Matrix</h2><img src="{{ cm_url }}"></div>
+<div class="visual"><h2>ROC Curve</h2><img src="{{ roc_url }}"></div>
+</div>
+
+{% if tree_url %}
+<div class="section visual">
+<h2>Data Tree Visualization</h2>
+<img class="tree" src="{{ tree_url }}">
+<p class="muted">J48-style entropy decision tree visualization.</p>
+</div>
+{% endif %}
+
+<div class="section">
+<h2>Complete Output</h2>
+<pre>{{ complete }}</pre>
+</div>
+
+<div class="section">
+<h2>Dataset Preview</h2>
+{{ preview|safe }}
+</div>
+
+<div class="actions">
+<a class="back" href="/">← Back to Home</a>
+</div>
+</div>
+</div>
+</body>
+</html>
