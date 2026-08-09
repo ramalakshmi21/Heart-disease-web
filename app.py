@@ -24,7 +24,7 @@ from sklearn.ensemble import RandomForestClassifier
 
 app = Flask(__name__)
 app.secret_key = "heart-disease-data-mining"
-UPLOAD_DIR = os.path.join("static", "generated")
+UPLOAD_DIR = os.path.join("/tmp", "generated")
 os.makedirs(UPLOAD_DIR, exist_ok=True)
 
 ALLOWED = {"arff", "csv"}
